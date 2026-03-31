@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant QR Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .menu {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .item {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .item button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cart {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #333;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart button {
+      background: #ff9800;
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Demo Restaurant Menu</h1>
+  </header>  <div class="menu">
+    <div class="item">
+      <h3>Veg Burger</h3>
+      <p>₹120</p>
+      <button onclick="addToCart('Veg Burger',120)">Add to Cart</button>
+    </div><div class="item">
+  <h3>Pizza</h3>
+  <p>₹250</p>
+  <button onclick="addToCart('Pizza',250)">Add to Cart</button>
+</div>
+
+<div class="item">
+  <h3>Cold Drink</h3>
+  <p>₹60</p>
+  <button onclick="addToCart('Cold Drink',60)">Add to Cart</button>
+</div>
+
+  </div>  <div class="cart">
+    <span id="cartText">Cart: 0 items | ₹0</span>
+    <button onclick="placeOrder()">Place Order</button>
+  </div>  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('cartText').innerText = `Cart: ${cart.length} items | ₹${total}`;
+    }
+
+    function placeOrder() {
+      if (cart.length === 0) {
+        alert('Cart is empty');
+        return;
+      }
+      alert('Order placed successfully!');
+      cart = [];
+      updateCart();
+    }
+  </script></body>
+</html>
